@@ -23,7 +23,7 @@ If you appreciate this project and would like to support it, you can make a dona
   ### Cryptocurrency Donations
 
   - **Litecoin (LTC)**: `LhoGMEaiXnDX5QMmp6PYGU25a2V6UZo65H`
-  - **Etherium** (ETH)**: `0xa7a23A72D10F75cB3d2D7ae56634a4921C376D82`
+  - **Etherium (ETH)**: `0xa7a23A72D10F75cB3d2D7ae56634a4921C376D82`
 
   Every donation helps improve the bot and add new features. Thank you for your support!
 
