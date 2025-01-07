@@ -13,3 +13,19 @@ A **Discord groupchat selfbot** made by [@meowtermelon](https://t.me/meowtermelo
 
 ---
 
+# Donations
+
+If you appreciate this project and would like to support it, you can make a donation using the following methods:
+
+<details>
+  <summary>Click to expand donation options</summary>
+
+  ### Cryptocurrency Donations
+
+  - **Litecoin (LTC)**: `LhoGMEaiXnDX5QMmp6PYGU25a2V6UZo65H`
+  - **Etherium** (ETH)**: `0xa7a23A72D10F75cB3d2D7ae56634a4921C376D82`
+
+  Every donation helps improve the bot and add new features. Thank you for your support!
+
+</details>
+
