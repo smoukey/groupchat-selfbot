@@ -1,0 +1,14 @@
+{
+  "name": "discord grouchat selfbot",
+  "version": "1.0.0",
+  "description": "atat",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node bot.js"
+  },
+  "dependencies": {
+    "discord.js-selfbot-v13": "v3.1"
+  },
+  "author": "rege",
+  "license": "ISC"
+}

@@ -1,0 +1,13 @@
+{
+  "token": "user-token",
+  "ownerIds": [
+    "id1",
+    "id2",
+    "id3",
+    "id4" // u can add more here, i reccomend u to add the bot id here
+  ],
+  "groupId": "group id",
+  "commandCooldown": 5000,
+  "votekickTime": 15000, // Time in milliseconds for votekick vote collection
+  "votesRequired": 4 // Minimum number of votes required to kick a user
+}
