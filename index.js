@@ -12,6 +12,10 @@ const votesRequired = config.votesRequired;
 
 const client = new Client();
 
+
+let lastVoteKickTime = 0; 
+let delayMessageSent = false; 
+
 function addCooldown(message) {
     commandCooldown.add(message.author.id);
     setTimeout(() => {
