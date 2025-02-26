@@ -12,9 +12,8 @@ const votesRequired = config.votesRequired;
 
 const client = new Client();
 
-
-let lastVoteKickTime = 0; 
-let delayMessageSent = false; 
+let lastVoteKickTime = 0;
+let delayMessageSent = false;
 
 function addCooldown(message) {
     commandCooldown.add(message.author.id);
@@ -24,54 +23,55 @@ function addCooldown(message) {
 }
 
 client.on('messageCreate', async (message) => {
+    if (message.channel.id !== groupId) return;
+
     if (commandCooldown.has(message.author.id)) return;
 
-    if (message.channelId) {
-        if (message.content.startsWith(',kick') && ownerIds.includes(message.author.id)) {
-            addCooldown(message);
-            const args = message.content.split(' ');
-            if (args.length === 2) {
-                let userId;
-                if (args[1].startsWith('<@') && args[1].endsWith('>')) {
-                    userId = args[1].replace(/[<@!>]/g, '');
-                } else {
-                    userId = args[1];
-                }
-                try {
-                    const user = await client.users.fetch(userId);
-                    if (!user) {
-                        console.error(`Unknown user: ${userId}`);
-                        return;
-                    }
-                    if (ownerIds.includes(user.id)) {
-                        await message.channel.send("You can't remove an owner.");
-                        return;
-                    }
-                    await message.channel.removeUser(user);
-                } catch (error) {
-                    console.error(`Error removing user: ${error.message}`);
-                }
+    if (message.content.startsWith(',kick') && ownerIds.includes(message.author.id)) {
+        addCooldown(message);
+        const args = message.content.split(' ');
+        if (args.length === 2) {
+            let userId;
+            if (args[1].startsWith('<@') && args[1].endsWith('>')) {
+                userId = args[1].replace(/[<@!>]/g, '');
             } else {
-                await message.channel.send("Incorrect usage. Correct syntax: `,kick <userID>` or `,kick @mention`");
+                userId = args[1];
             }
-        }
-
-        else if (message.content.startsWith(',votekick')) {
-            addCooldown(message);
-            const now = Date.now();
-            if (now - lastVoteKickTime < 60000) {
-                if (!delayMessageSent) {
-                    delayMessageSent = true;
-                    await message.channel.send("Please wait a moment before initiating another vote.");
-                    setTimeout(() => {
-                        delayMessageSent = false;
-                    }, 5000);
+            try {
+                const user = await client.users.fetch(userId);
+                if (!user) {
+                    console.error(`Unknown user: ${userId}`);
+                    return;
                 }
-                return;
+                if (ownerIds.includes(user.id)) {
+                    await message.channel.send("You can't remove an owner.");
+                    return;
+                }
+                await message.channel.removeUser(user);
+            } catch (error) {
+                console.error(`Error removing user: ${error.message}`);
             }
-            lastVoteKickTime = now;
-            await handleVoteKick(message);
+        } else {
+            await message.channel.send("Incorrect usage. Correct syntax: `,kick <userID>` or `,kick @mention`");
         }
+    }
+
+    // ,votekick command
+    else if (message.content.startsWith(',votekick')) {
+        addCooldown(message);
+        const now = Date.now();
+        if (now - lastVoteKickTime < 60000) {
+            if (!delayMessageSent) {
+                delayMessageSent = true;
+                await message.channel.send("Please wait a moment before initiating another vote.");
+                setTimeout(() => {
+                    delayMessageSent = false;
+                }, 5000);
+            }
+            return;
+        }
+        lastVoteKickTime = now;
+        await handleVoteKick(message);
     }
 });
 
